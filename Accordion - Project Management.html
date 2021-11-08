@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .accordion {
+        max-width: 600px;
+        margin: 4rem auto;
+        width: 90%;
+        font-family: "Raleway";
+      }
+      body {
+        padding-top: 70px;
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+      }
+      .accordion__title {
+        margin: 12px 0;
+        color: #11193d;
+        font-size: 25px;
+        font-weight: bold;
+        font-family: "Spartan", sans-serif;
+        letter-spacing: 1px;
+        cursor: pointer;
+        -webkit-transition: 0.3s ease;
+        transition: 0.3s ease;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      /* .accordion__title:hover {
+    background: #484b77;
+  } */
+      .accordion__copy {
+        display: none;
+        color: gray;
+        line-height: 1.6;
+
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .accordion__copy--open {
+        display: block;
+      }
+      .learn {
+        margin-bottom: -40px;
+        color: #11193d;
+        font-weight: bold;
+      }
+      .accordion__item {
+        padding: 5px 12px;
+        margin: 5px 0;
+      }
+      .accordion__copy {
+        color: #11193d;
+        font-family: "Spartan", sans-serif;
+        font-size: 20px;
+        padding-left: 65px;
+        padding-top: 0;
+      }
+
+      .mystyle {
+        box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.6em,
+          rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+        border-left: 3px solid #11193d;
+      }
+
+      .hide-plus {
+        width: 40px !important;
+        height: 40px !important;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+      .show-plus {
+        width: 40px !important;
+        height: 40px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+      .show-icon {
+        width: 40px !important;
+        height: 40px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+
+      .hide-icon {
+        width: 40px !important;
+        height: 40px !important;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+
+      .hide-icon-2 {
+        width: 40px !important;
+        height: 40px !important;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+      .show-icon-2 {
+        width: 40px !important;
+        height: 40px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+
+      .show-sign-2 {
+        width: 40px !important;
+        height: 40px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+      .hide-sign-2 {
+        width: 40px !important;
+        height: 40px !important;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+      .show-sign-3 {
+        width: 40px !important;
+        height: 40px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+      .hide-sign-3 {
+        width: 40px !important;
+        height: 40px !important;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+      .hide-icon-3 {
+        width: 40px !important;
+        height: 40px !important;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+      .show-icon-3 {
+        width: 40px !important;
+        height: 40px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        font-size: 30px;
+        margin-right: 20px;
+        color: #11193d;
+        font-weight: 800;
+        box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+      }
+      @media only screen and (max-width: 500px) {
+        .plus-sign {
+          width: 50px !important;
+          height: 40px !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 70px;
+          font-size: 30px;
+          margin-right: 20px;
+          color: #11193d;
+          font-weight: 800;
+          box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <img
+        class="figmass"
+        width="400px"
+        id="image-change"
+        src="figmass.png"
+        alt="img"
+      />
+    </div>
+    <div class="accordion">
+      <div class="accordion__item mystyle" id="mainDiv">
+        <h3 onclick="changeimg1()" class="accordion__title js-title">
+          <span id="hover1" class="hide-plus">+</span
+          ><img
+            src="./icon.png"
+            id="hover-icon-1"
+            class="show-icon"
+            style="width: 35px; height: 35px"
+          />
+          Unlimited SCRUM Boards
+        </h3>
+        <p class="accordion__copy accordion__copy--open js-copy">
+          Run agile projects. Assign tasks to team members, set priorities and
+          deadlines, create checklists, follow the activity and much more
+          <br /><br />
+          <a class="learn" href="">Learn more</a>
+        </p>
+      </div>
+      <div class="accordion__item" id="mainDiv1">
+        <h3
+          onclick="changeimg2()"
+          id="accordion2"
+          class="accordion__title js-title"
+        >
+          <span onclick="changeicon()" id="hover2" class="show-sign-2">+</span
+          ><img
+            src="./icon.png"
+            id="hover-icon-2"
+            class="hide-icon-2"
+            style="width: 35px; height: 35px"
+          />
+
+          Chat with Your Team Members
+        </h3>
+        <p class="accordion__copy js-copy">
+          Simplify your team’s communication. Bring all conversations related to
+          the security and compliance of your websites to one place - AllyRight.
+          With our secure chat app, your team members can easily keep track of
+          all their messages related to their projects.
+        </p>
+      </div>
+      <div class="accordion__item" id="mainDiv2">
+        <h3 onclick="changeimg3()" class="accordion__title js-title">
+          <span id="hover3" class="show-sign-3">+</span
+          ><img
+            src="./icon.png"
+            id="hover-icon-3"
+            class="hide-icon-3"
+            style="width: 35px; height: 35px"
+          />
+          Customizable User Management
+        </h3>
+        <p class="accordion__copy js-copy">
+          Easily manage your team members and who has access to what kind of
+          information. AllyRight gives you five different roles by default, from
+          “Super Admin,” to “View Only”. Enterprise accounts can also create
+          custom roles and permissions.
+        </p>
+      </div>
+    </div>
+  </body>
+  <script>
+    let changeimg1 = () => {
+      let plus = document.getElementById("hover1");
+      plus.classList.toggle("show-plus");
+      let icon = document.getElementById("hover-icon-1");
+      icon.classList.toggle("hide-icon");
+      // -----------------------------------------
+      plus = document.getElementById("hover2");
+      plus.classList.remove("hide-sign-2");
+      plus.classList.add("show-sign-2");
+      icon = document.getElementById("hover-icon-2");
+      icon.classList.remove("show-icon-2");
+      icon.classList.add("hide-icon-2");
+      // --------------------------------------
+      plus = document.getElementById("hover3");
+      plus.classList.remove("hide-sign-3");
+      plus.classList.add("show-sign-3");
+      icon = document.getElementById("hover-icon-3");
+      icon.classList.remove("show-icon-3");
+      icon.classList.add("hide-icon-3");
+
+      // ------
+      let img = (document.getElementById("image-change").src = "figmass.png");
+      var element = document.getElementById("mainDiv");
+      element.classList.toggle("mystyle");
+      let element1 = document.getElementById("mainDiv1");
+      element1.classList.remove("mystyle");
+      var element2 = document.getElementById("mainDiv2");
+      element2.classList.remove("mystyle");
+    };
+    let changeimg2 = () => {
+      
+      let plus = document.getElementById("hover1");
+      plus.classList.add("show-plus");
+      let icon = document.getElementById("hover-icon-1");
+      icon.classList.remove("show-icon");
+      icon.classList.add("hide-icon");
+
+      // ----------------------------------------------
+      plus = document.getElementById("hover2");
+      plus.classList.toggle("hide-sign-2");
+      icon = document.getElementById("hover-icon-2");
+      icon.classList.toggle("show-icon-2");
+      // ----------------------------------------------
+
+      plus = document.getElementById("hover3");
+      plus.classList.remove("hide-sign-3");
+      plus.classList.add("show-sign-3");
+      icon = document.getElementById("hover-icon-3");
+      icon.classList.remove("show-icon-3");
+      icon.classList.add("hide-icon-3");
+
+      // end----------------------------------------------
+
+      let img = (document.getElementById("image-change").src =
+        "Chat screen 1.png");
+      let shadow = document.getElementById("accordion2");
+      var element = document.getElementById("mainDiv");
+      console.log(element);
+      element.classList.remove("mystyle");
+      let element1 = document.getElementById("mainDiv1");
+      element1.classList.toggle("mystyle");
+      var element2 = document.getElementById("mainDiv2");
+      element2.classList.remove("mystyle");
+    };
+
+    let changeimg3 = () => {
+      let plus = document.getElementById("hover1");
+      plus.classList.add("show-plus");
+      let icon = document.getElementById("hover-icon-1");
+      icon.classList.remove("show-icon");
+      icon.classList.add("hide-icon");
+
+      // ----------------------------------
+      plus = document.getElementById("hover2");
+      plus.classList.remove("hide-sign-2");
+      plus.classList.add("show-sign-2");
+      icon = document.getElementById("hover-icon-2");
+      icon.classList.remove("show-icon-2");
+      icon.classList.add("hide-icon-2");
+      // ---------------------------------------
+      plus = document.getElementById("hover3");
+      plus.classList.toggle("hide-sign-3");
+      icon = document.getElementById("hover-icon-3");
+      icon.classList.toggle("show-icon-3");
+
+      let img = (document.getElementById("image-change").src =
+        "Content Moderation.png");
+      var element = document.getElementById("mainDiv");
+      element.classList.remove("mystyle");
+      let element1 = document.getElementById("mainDiv1");
+      element1.classList.remove("mystyle");
+      var element2 = document.getElementById("mainDiv2");
+      element2.classList.toggle("mystyle");
+    };
+
+  
+    $(document).ready(function () {
+      var $title = $(".js-title");
+      var copy = ".js-copy";
+
+      $title.click(function () {
+        $(this).next(copy).slideToggle();
+        $(this).parent().siblings().children().next().slideUp();
+        return false;
+      });
+    });
+  </script>
+</html>
